@@ -10,29 +10,24 @@
     <input type="submit" class="button">
   </form>
 
-  <form>
-    <label for="flag_color">Primary Flag Colour:</label><br>
-    <input type="radio" id="blue" />
-    <label for="blue">Blue</label><br>
-    <input type="radio" id="green" />
-    <label for="green">Green</label><br>
-    <input type="radio" id="red" />
-    <label for="red">Red</label><br>
+  <form action="/new" method="post">
+    <label for="flag_color">Primary Flag Colour:</label>
+    <input type="text" name="flag_color" />
     <input type="submit" class="button">
   </form>
   <form>
     <label for="flag_color_secondary">Secondary Colour of the Flag:</label><br>
-    <input type="radio" id="blue" />
+    <input type="radio" name="blue" />
     <label for="blue">Blue</label><br>
-    <input type="radio" id="green" />
+    <input type="radio" name="green" />
     <label for="green">Green</label><br>
-    <input type="radio" id="red" />
+    <input type="radio" name="red" />
     <label for="red">Red</label><br>
     <input type="submit" class="button">
   </form>
   <form>
     <label for="flag_pattern">Flag Pattern</label>
-    <select name="patterns" id="patterns">
+    <select name="patterns" name="patterns">
       <option value="ZigZag">ZigZag</option>
       <option value="Spotted">Spotted</option>
       <option value="Hoops">Hoops</option>
