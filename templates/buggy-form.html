@@ -6,35 +6,38 @@
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" />
-    <input type="submit" class="button">
-  </form>
+    <input type="text" name="qty_wheels" /><br>
+  <form><br>
 
   <form action="/new" method="post">
-    <label for="flag_color">Primary Flag Colour:</label>
-    <input type="text" name="flag_color" />
-    <input type="submit" class="button">
-  </form>
+    <label for="flag_color">Primary Colour of the Flag:</label>
+    <select name="flag_color">
+      <option value="Blue">Blue</option>
+      <option value="Red">Red</option>
+      <option value="Green">Green</option>
+    </select><br>
+  <form><br>
+
   <form>
-    <label for="flag_color_secondary">Secondary Colour of the Flag:</label><br>
-    <input type="radio" name="blue" />
-    <label for="blue">Blue</label><br>
-    <input type="radio" name="green" />
-    <label for="green">Green</label><br>
-    <input type="radio" name="red" />
-    <label for="red">Red</label><br>
-    <input type="submit" class="button">
-  </form>
+    <label for="flag_color_secondary">Secondary Colour of the Flag:</label>
+    <select name="flag_color_secondary">
+      <option value="Blue">Blue</option>
+      <option value="Red">Red</option>
+      <option value="Green">Green</option>
+    </select><br>
+    
+  <form><br>
+
   <form>
     <label for="flag_pattern">Flag Pattern</label>
-    <select name="patterns" name="patterns">
+    <select name="flag_pattern">
       <option value="ZigZag">ZigZag</option>
       <option value="Spotted">Spotted</option>
       <option value="Hoops">Hoops</option>
     </select>
-    <input type="submit" class="button">
-  </form>
+  <form><br>
   <p>
+    <input type="submit" class="button">
     <a href="/" class="button">Home</a>
   </p>
 
