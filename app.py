@@ -41,7 +41,7 @@ def create_buggy():
                     (qty_wheels, flag_color, flag_color_secondary, flag_pattern, DEFAULT_BUGGY_ID)
                 )
                 con.commit()
-                msg = f"qty_wheels={qty_wheels} flag_color={flag_color} flag_color_secondary={flag_color_secondary} flag_pattern={flag_pattern}"
+                msg = "Record updated"
         except:
             con.rollback()
             msg = "error in update operation"
