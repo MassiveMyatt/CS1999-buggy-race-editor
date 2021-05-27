@@ -32,7 +32,7 @@ def create_buggy():
         flag_color_secondary = request.form['flag_color_secondary']
         flag_pattern = request.form['flag_pattern']
         if not qty_wheels.isdigit():
-            return render_template("buggy-form.html", msg = "Incorrect data type")
+            return render_template("buggy-form.html", msg = "The data you entered is incorrect, please ensure it is an integer.")
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()

@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-  <h1>Make buggy</h1>
+<div class="form">
+  <div class="header">
+    <h1>Buggy Creation</h1>
+  </div>
+  
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" /><br>
+    <input type="text" name="qty_wheels" size="5"/><br>
   <form><br>
 
   <form action="/new" method="post">
@@ -29,7 +32,7 @@
   <form><br>
 
   <form>
-    <label for="flag_pattern">Flag Pattern</label>
+    <label for="flag_pattern">Flag Pattern:</label>
     <select name="flag_pattern">
       <option value="ZigZag">ZigZag</option>
       <option value="Spotted">Spotted</option>
@@ -41,7 +44,10 @@
     <a href="/" class="button">Home</a>
   </p>
 
-  <p>
-    {{ msg }}
-  </p>
+  <div class="message">
+    <p>
+      {{msg}}
+    </p>
+  </div>
+</div>
 {% endblock %}

@@ -22,9 +22,7 @@ body {
   background: #ffffff;
   margin: 0 0 0 3em;
 }
-h1 {
-  margin: 0 0 1em 0;
-}
+
 p {
   margin: 1em 0;
 }
@@ -61,4 +59,24 @@ table td, table th {
 }
 .spacer {
   margin: 3em 0;
+}
+
+.form{
+  padding: 5px;
+  margin: 5px;
+  position: absolute;
+  border-style: dashed;
+  border-color: black;
+  text-align: center;
+}
+
+.header{
+  padding: 5px;
+  margin: 5px;
+  color: green;
+}
+
+.message {
+  color: red;
+  max-width: fit-content;
 }
