@@ -9,12 +9,13 @@
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" size="5"/><br>
+    <input type="text" name="qty_wheels" size="5" value="{{ buggy['qty_wheels'] }}" /><br>
   <form><br>
 
   <form action="/new" method="post">
     <label for="flag_color">Primary Colour of the Flag:</label>
     <select name="flag_color">
+      <option value="" selected disabled hidden>{{ buggy['flag_color'] }}</option>
       <option value="Blue">Blue</option>
       <option value="Red">Red</option>
       <option value="Green">Green</option>
@@ -24,6 +25,7 @@
   <form>
     <label for="flag_color_secondary">Secondary Colour of the Flag:</label>
     <select name="flag_color_secondary">
+      <option value="" selected disabled hidden>{{ buggy['flag_color_secondary'] }}</option>
       <option value="Blue">Blue</option>
       <option value="Red">Red</option>
       <option value="Green">Green</option>
@@ -34,9 +36,13 @@
   <form>
     <label for="flag_pattern">Flag Pattern:</label>
     <select name="flag_pattern">
-      <option value="ZigZag">ZigZag</option>
-      <option value="Spotted">Spotted</option>
-      <option value="Hoops">Hoops</option>
+      <option value="" selected disabled hidden>{{ buggy['flag_pattern'] }}</option>
+      <option value="plain">Plain</option>
+      <option value="vstripe">Vertical Stripe</option>
+      <option value="hstripe">Horizontal Stripe</option>
+      <option value="dstripe">Diagonal Stripe</option>
+      <option value="checker">Checkered</option>
+      <option value="spot">Spotted</option>
     </select>
   <form><br>
   <p>
