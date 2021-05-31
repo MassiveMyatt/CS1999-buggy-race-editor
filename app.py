@@ -29,7 +29,7 @@ def create_buggy():
         cur = con.cursor()
         cur.execute("SELECT * FROM buggies")
         record = cur.fetchone();
-        return render_template("buggy-form.html", buggy=record)
+        return render_template("buggy-form.html", buggy=record,)
     elif request.method == 'POST':
         msg=""
         qty_wheels = request.form['qty_wheels']
@@ -37,7 +37,12 @@ def create_buggy():
         flag_color_secondary = request.form['flag_color_secondary']
         flag_pattern = request.form['flag_pattern']
         if not qty_wheels.isdigit():
-            return render_template("buggy-form.html", msg = "The data you entered is incorrect, please ensure it is an integer.")
+            con = sql.connect(DATABASE_FILE)
+            con.row_factory = sql.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM buggies")
+            record = cur.fetchone();
+            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
@@ -52,7 +57,7 @@ def create_buggy():
             msg = "error in update operation"
         finally:
             con.close()
-        return render_template("updated.html", msg = msg)
+        return render_template("updated.html", msg = msg,)
 
 #------------------------------------------------------------
 # a page for displaying the buggy
