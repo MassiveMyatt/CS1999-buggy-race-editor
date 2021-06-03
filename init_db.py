@@ -29,6 +29,7 @@ connection.execute("""
     flag_color            VARCHAR(20),
     flag_color_secondary  VARCHAR(20),
     flag_pattern          VARCHAR(20),
+    power_type            VARCHAR(20),
     total_cost            VARCHAR(20)
   )
 

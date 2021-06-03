@@ -36,6 +36,7 @@ def create_buggy():
         flag_color = request.form['flag_color']
         flag_color_secondary = request.form['flag_color_secondary']
         flag_pattern = request.form['flag_pattern']
+        power_type= request.form['power_type']
         if not qty_wheels.isdigit():
             con = sql.connect(DATABASE_FILE)
             con.row_factory = sql.Row
@@ -47,8 +48,8 @@ def create_buggy():
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=? WHERE id=?",
-                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, DEFAULT_BUGGY_ID)
+                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=? WHERE id=?",
+                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, DEFAULT_BUGGY_ID)
                 )
                 con.commit()
                 msg = "Record updated"
