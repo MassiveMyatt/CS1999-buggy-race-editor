@@ -2,6 +2,8 @@ from sqlite3.dbapi2 import SQLITE_SELECT
 from flask import Flask, render_template, request, jsonify
 import sqlite3 as sql
 
+from flask.json import tojson_filter
+
 # app - The flask application where all the magical things are configured.
 app = Flask(__name__)
 
@@ -9,7 +11,6 @@ app = Flask(__name__)
 DATABASE_FILE = "database.db"
 DEFAULT_BUGGY_ID = "1"
 BUGGY_RACE_SERVER_URL = "http://rhul.buggyrace.net"
-TOTAL_COST = 0
 
 #------------------------------------------------------------
 # the index page
@@ -25,6 +26,7 @@ def home():
 #------------------------------------------------------------
 @app.route('/new', methods = ['POST', 'GET'])
 def create_buggy():
+    TOTAL_COST = 0
     if request.method == 'GET':
         con = sql.connect(DATABASE_FILE)
         con.row_factory = sql.Row
@@ -47,25 +49,25 @@ def create_buggy():
             record = cur.fetchone();
             return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
         elif power_type == "petrol":
-            TOTAL_COST = + 4
+            TOTAL_COST = TOTAL_COST + 4
         elif power_type == "fusion":
-            TOTAL_COST = + 400
+            TOTAL_COST = TOTAL_COST + 400
         elif power_type == "steam":
-            TOTAL_COST = + 3
+            TOTAL_COST = TOTAL_COST + 3
         elif power_type == "bio":
-            TOTAL_COST = + 5
+            TOTAL_COST = TOTAL_COST + 5
         elif power_type == "electric":
-            TOTAL_COST = + 20
+            TOTAL_COST = TOTAL_COST + 20
         elif power_type == "rocket":
-            TOTAL_COST = + 16
+            TOTAL_COST = TOTAL_COST + 16
         elif power_type == "hamster":
-            TOTAL_COST = + 3
+            TOTAL_COST = TOTAL_COST + 3
         elif power_type == "thermo":
-            TOTAL_COST = + 300
+            TOTAL_COST = TOTAL_COST + 300
         elif power_type == "solar":
-            TOTAL_COST = + 40
+            TOTAL_COST = TOTAL_COST + 40
         elif power_type == "wind":
-            TOTAL_COST = + 20
+            TOTAL_COST = TOTAL_COST + 20
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
