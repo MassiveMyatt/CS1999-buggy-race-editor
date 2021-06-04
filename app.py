@@ -48,26 +48,28 @@ def create_buggy():
             cur.execute("SELECT * FROM buggies")
             record = cur.fetchone();
             return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
-        elif power_type == "petrol":
+        if power_type == "petrol":
             TOTAL_COST = TOTAL_COST + 4
-        elif power_type == "fusion":
+        if power_type == "fusion":
             TOTAL_COST = TOTAL_COST + 400
-        elif power_type == "steam":
+        if power_type == "steam":
             TOTAL_COST = TOTAL_COST + 3
-        elif power_type == "bio":
+        if power_type == "bio":
             TOTAL_COST = TOTAL_COST + 5
-        elif power_type == "electric":
+        if power_type == "electric":
             TOTAL_COST = TOTAL_COST + 20
-        elif power_type == "rocket":
+        if power_type == "rocket":
             TOTAL_COST = TOTAL_COST + 16
-        elif power_type == "hamster":
+        if power_type == "hamster":
             TOTAL_COST = TOTAL_COST + 3
-        elif power_type == "thermo":
+        if power_type == "thermo":
             TOTAL_COST = TOTAL_COST + 300
-        elif power_type == "solar":
+        if power_type == "solar":
             TOTAL_COST = TOTAL_COST + 40
-        elif power_type == "wind":
+        if power_type == "wind":
             TOTAL_COST = TOTAL_COST + 20
+        if flag_pattern == "plain":
+            TOTAL_COST = TOTAL_COST + 4
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
