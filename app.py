@@ -55,7 +55,14 @@ def create_buggy():
             cur = con.cursor()
             cur.execute("SELECT * FROM buggies")
             record = cur.fetchone();
-            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the number of wheels are even")
+            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the number of wheels are even.")
+        if flag_color == flag_color_secondary:
+            con = sql.connect(DATABASE_FILE)
+            con.row_factory = sql.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM buggies")
+            record = cur.fetchone();
+            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the Primary and Secondary flag colours are not the same.")        
         if power_type == "petrol":
             TOTAL_COST = TOTAL_COST + 4
         if power_type == "fusion":
