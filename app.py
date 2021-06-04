@@ -41,6 +41,7 @@ def create_buggy():
         flag_color_secondary = request.form['flag_color_secondary']
         flag_pattern = request.form['flag_pattern']
         power_type= request.form['power_type']
+        tyres = request.form['tyres']
         if not qty_wheels.isdigit():
             con = sql.connect(DATABASE_FILE)
             con.row_factory = sql.Row
@@ -68,17 +69,25 @@ def create_buggy():
             TOTAL_COST = TOTAL_COST + 40
         if power_type == "wind":
             TOTAL_COST = TOTAL_COST + 20
-        if flag_pattern == "plain":
-            TOTAL_COST = TOTAL_COST + 4
+        if tyres == "knobbly":
+            TOTAL_COST = TOTAL_COST + 15
+        if tyres == "slick":
+            TOTAL_COST = TOTAL_COST + 10
+        if tyres == "steelband":
+            TOTAL_COST = TOTAL_COST + 20
+        if tyres == "reactive":
+            TOTAL_COST = TOTAL_COST + 40
+        if tyres == "maglev":
+            TOTAL_COST = TOTAL_COST + 50
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
                 cur.execute(
-                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=? WHERE id=?",
-                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, DEFAULT_BUGGY_ID)
+                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=?, tyres=?, TOTAL_COST=? WHERE id=?",
+                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST, DEFAULT_BUGGY_ID)
                 )
                 con.commit()
-                msg = TOTAL_COST
+                msg = "Record updated"
         except:
             con.rollback()
             msg = "error in update operation"

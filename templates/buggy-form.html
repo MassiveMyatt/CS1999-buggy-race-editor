@@ -59,8 +59,19 @@
       <option value="thermo">Thermonuclear</option>
       <option value="solar">Solar</option>
       <option value="wind">Wind</option>
-    </select>
+    </select><br>
   <form><br>
+    <form>
+      <label for="tyres">Type of Tyre</label>
+      <select name="tyres">
+        <option value="{{ buggy['tyres'] }}" selected hidden>{{ buggy['tyres'] }}</option>
+        <option value="knobbly">Knobbly</option>
+        <option value="slick">Slick</option>
+        <option value="steelband">Steelband</option>
+        <option value="reactive">Reactive</option>
+        <option value="maglev">Maglev</option>
+      </select>
+    <form><br>
   <p>
     <input type="submit" class="button">
     <a href="/" class="button">Home</a>
