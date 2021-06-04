@@ -46,7 +46,7 @@ def create_buggy():
             cur.execute("SELECT * FROM buggies")
             record = cur.fetchone();
             return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
-        if power_type == "petrol":
+        elif power_type == "petrol":
             TOTAL_COST = + 4
         elif power_type == "fusion":
             TOTAL_COST = + 400
@@ -54,6 +54,8 @@ def create_buggy():
             TOTAL_COST = + 3
         elif power_type == "bio":
             TOTAL_COST = + 5
+        elif power_type == "electric":
+            TOTAL_COST = + 20
         elif power_type == "rocket":
             TOTAL_COST = + 16
         elif power_type == "hamster":
@@ -72,7 +74,7 @@ def create_buggy():
                     (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, DEFAULT_BUGGY_ID)
                 )
                 con.commit()
-                msg = "Record Updated"
+                msg = TOTAL_COST
         except:
             con.rollback()
             msg = "error in update operation"
