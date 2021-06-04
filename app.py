@@ -49,6 +49,13 @@ def create_buggy():
             cur.execute("SELECT * FROM buggies")
             record = cur.fetchone();
             return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
+        if not (int(qty_wheels) % 2) == 0:
+            con = sql.connect(DATABASE_FILE)
+            con.row_factory = sql.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM buggies")
+            record = cur.fetchone();
+            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the number of wheels are even")
         if power_type == "petrol":
             TOTAL_COST = TOTAL_COST + 4
         if power_type == "fusion":
@@ -65,20 +72,20 @@ def create_buggy():
             TOTAL_COST = TOTAL_COST + 3
         if power_type == "thermo":
             TOTAL_COST = TOTAL_COST + 300
-        if power_type == "solar":
+        if power_type == "solar": 
             TOTAL_COST = TOTAL_COST + 40
         if power_type == "wind":
             TOTAL_COST = TOTAL_COST + 20
         if tyres == "knobbly":
-            TOTAL_COST = TOTAL_COST + 15
+            TOTAL_COST = TOTAL_COST + 15 * int((qty_wheels))
         if tyres == "slick":
-            TOTAL_COST = TOTAL_COST + 10
+            TOTAL_COST = TOTAL_COST + 10 * int((qty_wheels))
         if tyres == "steelband":
-            TOTAL_COST = TOTAL_COST + 20
+            TOTAL_COST = TOTAL_COST + 20 * int((qty_wheels))
         if tyres == "reactive":
-            TOTAL_COST = TOTAL_COST + 40
+            TOTAL_COST = TOTAL_COST + 40 * int((qty_wheels))
         if tyres == "maglev":
-            TOTAL_COST = TOTAL_COST + 50
+            TOTAL_COST = TOTAL_COST + 50 * int((qty_wheels))
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
@@ -87,7 +94,7 @@ def create_buggy():
                     (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST, DEFAULT_BUGGY_ID)
                 )
                 con.commit()
-                msg = "Record updated"
+                msg = f"Total Cost of the Buggy is {TOTAL_COST}"
         except:
             con.rollback()
             msg = "error in update operation"
