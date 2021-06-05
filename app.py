@@ -2,7 +2,6 @@ from sqlite3.dbapi2 import SQLITE_SELECT
 from flask import Flask, render_template, request, jsonify
 import sqlite3 as sql
 
-from flask.json import tojson_filter
 
 # app - The flask application where all the magical things are configured.
 app = Flask(__name__)
