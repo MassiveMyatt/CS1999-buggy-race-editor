@@ -35,15 +35,21 @@ a.button, input.button {
   background-color: #ffffff;
   color: #000000;
   box-shadow: 5px 5px 5px #999999;
+  font-size: 100%;
 }
 a.button:hover {
   background-color: #000000;
   color: #ffffff;
 }
-input {
+.wheels {
   padding: 0.5em;
   font-size: 100%;
 }
+
+.color {
+  padding: 0.3em;
+}
+
 input.button {
   background-color: #99ff99;
 }

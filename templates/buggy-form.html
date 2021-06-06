@@ -9,27 +9,18 @@
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" id="wheel_input" name="qty_wheels" size="5" value="{{ buggy['qty_wheels'] }}" /><br>
+    <input type="text" id="wheel_input" name="qty_wheels" size="5" class="wheels" value="{{ buggy['qty_wheels'] }}" /><br>
   <form><br>
 
   <form action="/new" method="post">
     <label for="flag_color">Primary Colour of the Flag:</label>
-    <select id="flag_input" name="flag_color">
-      <option value="{{ buggy['flag_color'] }}" selected hidden>{{ buggy['flag_color'] }}</option>
-      <option value="Blue">Blue</option>
-      <option value="Red">Red</option>
-      <option value="Green">Green</option>
-    </select><br>
+    <input type="color" id="flag_input" name="flag_color" class="color" value="{{ buggy['flag_color'] }}"><br>
   <form><br>
 
   <form action="/new" method="post">
     <label for="flag_color_secondary">Secondary Colour of the Flag:</label>
-    <select id="second_flag_input" name="flag_color_secondary">
-      <option value="{{ buggy['flag_color_secondary'] }}" selected hidden>{{ buggy['flag_color_secondary'] }}</option>
-      <option value="Blue">Blue</option>
-      <option value="Red">Red</option>
-      <option value="Green">Green</option>
-    </select><br>
+    <input type="color" id="second_flag_input" name="flag_color_secondary" class="color" value="{{ buggy['flag_color_secondary'] }}"><br>
+    </select>
     
   <form><br>
 
@@ -88,13 +79,12 @@
 <script>
   function auto_fill()
   {
-    var colorArray = ['Blue', 'Green', 'Red'];
     var patternArray = ['plain', 'vstripe', 'hstripe', 'dstripe', 'checker', 'spot'];
     var powerArray = ['petrol', 'fusion', 'steam', 'bio', 'electric', 'rocket', 'hamster', 'thermo', 'solar', 'wind'];
     var tyreArray = ['knobbly', 'slick', 'steelband', 'reactive', 'maglev'];
     document.getElementById('wheel_input').value = Math.floor(Math.random() * 10) *2;
-    document.getElementById('flag_input').value = colorArray[Math.floor(Math.random() * colorArray.length)];
-    document.getElementById('second_flag_input').value = colorArray[Math.floor(Math.random() * colorArray.length)];
+    document.getElementById('flag_input').value = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+    document.getElementById('second_flag_input').value = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
     document.getElementById('pattern_input').value = patternArray[Math.floor(Math.random() * patternArray.length)];
     document.getElementById('power_input').value = powerArray[Math.floor(Math.random() * powerArray.length)];
     document.getElementById('tyre_input').value = tyreArray[Math.floor(Math.random() * tyreArray.length)];
