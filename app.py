@@ -55,6 +55,13 @@ def create_buggy():
             cur.execute("SELECT * FROM buggies")
             record = cur.fetchone();
             return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the number of wheels are even.")
+        if (int(qty_wheels)) < 4:
+            con = sql.connect(DATABASE_FILE)
+            con.row_factory = sql.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM buggies")
+            record = cur.fetchone();
+            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure you have more than 4 wheels.")
         if flag_color == flag_color_secondary:
             con = sql.connect(DATABASE_FILE)
             con.row_factory = sql.Row

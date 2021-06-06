@@ -9,12 +9,12 @@
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
-    <input type="text" name="qty_wheels" size="5" value="{{ buggy['qty_wheels'] }}"/><br>
+    <input type="text" id="wheel_input" name="qty_wheels" size="5" value="{{ buggy['qty_wheels'] }}" /><br>
   <form><br>
 
   <form action="/new" method="post">
     <label for="flag_color">Primary Colour of the Flag:</label>
-    <select name="flag_color">
+    <select id="flag_input" name="flag_color">
       <option value="{{ buggy['flag_color'] }}" selected hidden>{{ buggy['flag_color'] }}</option>
       <option value="Blue">Blue</option>
       <option value="Red">Red</option>
@@ -22,9 +22,9 @@
     </select><br>
   <form><br>
 
-  <form>
+  <form action="/new" method="post">
     <label for="flag_color_secondary">Secondary Colour of the Flag:</label>
-    <select name="flag_color_secondary">
+    <select id="second_flag_input" name="flag_color_secondary">
       <option value="{{ buggy['flag_color_secondary'] }}" selected hidden>{{ buggy['flag_color_secondary'] }}</option>
       <option value="Blue">Blue</option>
       <option value="Red">Red</option>
@@ -33,9 +33,9 @@
     
   <form><br>
 
-  <form>
+  <form action="/new" method="post">
     <label for="flag_pattern">Flag Pattern:</label>
-    <select name="flag_pattern">
+    <select id="pattern_input" name="flag_pattern">
       <option value="{{ buggy['flag_pattern'] }}" selected hidden>{{ buggy['flag_pattern'] }}</option>
       <option value="plain">Plain</option>
       <option value="vstripe">Vertical Stripe</option>
@@ -47,7 +47,7 @@
   <form><br>
   <form>
     <label for="power_type">Power Type</label>
-    <select name="power_type">
+    <select id="power_input" name="power_type">
       <option value="{{ buggy['power_type'] }}" selected hidden>{{ buggy['power_type'] }}</option>
       <option value="petrol">Petrol</option>
       <option value="fusion">Fusion</option>
@@ -61,9 +61,9 @@
       <option value="wind">Wind</option>
     </select><br>
   <form><br>
-    <form>
+    <form action="/new" method="post">
       <label for="tyres">Type of Tyre</label>
-      <select name="tyres">
+      <select id="tyre_input" name="tyres">
         <option value="{{ buggy['tyres'] }}" selected hidden>{{ buggy['tyres'] }}</option>
         <option value="knobbly">Knobbly</option>
         <option value="slick">Slick</option>
@@ -75,7 +75,7 @@
   <p>
     <input type="submit" class="button">
     <a href="/" class="button">Home</a>
-    <a href="/new" id="1" class="button" onclick="auto_fill(this.id">Fill Form</a>
+    <a href="#" type="button" class="button" onclick="auto_fill()">Fill Form</a>
   </p>
 
   <div class="message">
@@ -86,12 +86,18 @@
 </div>
 
 <script>
-  function auto_fill(id)
+  function auto_fill()
   {
-    if(id == "1")
-    {
-      document.getElementsByName('qty_wheels').value = '4';
-    }
+    var colorArray = ['Blue', 'Green', 'Red'];
+    var patternArray = ['plain', 'vstripe', 'hstripe', 'dstripe', 'checker', 'spot'];
+    var powerArray = ['petrol', 'fusion', 'steam', 'bio', 'electric', 'rocket', 'hamster', 'thermo', 'solar', 'wind'];
+    var tyreArray = ['knobbly', 'slick', 'steelband', 'reactive', 'maglev'];
+    document.getElementById('wheel_input').value = Math.floor(Math.random() * 10) *2;
+    document.getElementById('flag_input').value = colorArray[Math.floor(Math.random() * colorArray.length)];
+    document.getElementById('second_flag_input').value = colorArray[Math.floor(Math.random() * colorArray.length)];
+    document.getElementById('pattern_input').value = patternArray[Math.floor(Math.random() * patternArray.length)];
+    document.getElementById('power_input').value = powerArray[Math.floor(Math.random() * powerArray.length)];
+    document.getElementById('tyre_input').value = tyreArray[Math.floor(Math.random() * tyreArray.length)];
   }
 
 
