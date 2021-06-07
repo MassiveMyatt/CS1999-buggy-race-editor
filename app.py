@@ -116,6 +116,7 @@ def create_buggy():
                 con.commit()
                 msg = f"Total Cost of the Buggy is {TOTAL_COST}"
         except:
+            con = sql.connect(DATABASE_FILE)
             con.rollback()
             msg = "error in update operation"
         finally:
@@ -145,9 +146,19 @@ def edit_buggy(buggy_id):
     cur = con.cursor()
     cur.execute("SELECT * FROM buggies WHERE id=?", (buggy_id,))
     record = cur.fetchone();
-    print (f"FixME Edit #{buggy_id}")
     return render_template("buggy-form.html", buggy=record)
 
+# @app.route('/delete/<buggy_id>', methods=['POST'])
+# def delete_buggy(buggy_id ):
+#     if request.method == "POST":
+#         con = sql.connect(DATABASE_FILE)
+#         con.row_factory = sql.Row
+#         cur = con.cursor()
+#         cur.execute("DELETE FROM buggies WHERE id=?", (buggy_id,))
+#         records = cur.fetchall();
+#         return render_template("buggy-form.html", buggy=records)
+#     elif request.method == "GET":
+#         return render_template("index.html")
 #------------------------------------------------------------
 # You probably don't need to edit this... unless you want to ;)
 #

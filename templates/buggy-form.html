@@ -3,7 +3,7 @@
 {% block content %}
 <div class="form">
   <div class="header">
-  {% if buggy ['id'] %}
+  {% if buggy %}
     <h1>Editing Buggy #{{ buggy['id'] }}</h1>
   {% else %}
     <h1>Buggy Creation</h1>
@@ -11,9 +11,8 @@
   </div>
   
   <form action="/new" method="post">
-    <label for="id">Buggy ID:</label>
-    <input type="text" name="id" size="5" class="wheels" value="{{ buggy['id'] }}" /><br>
-  <form><br>
+    <input type="hidden" name="id" size="5" class="wheels" value="{{ buggy['id'] }}" />
+  <form>
 
   <form action="/new" method="post">
     <label for="qty_wheels">Number of wheels:</label>
@@ -71,10 +70,23 @@
         <option value="maglev">Maglev</option>
       </select>
     <form><br>
-  <p>
-    <input type="submit" class="button">
-    <a href="/" class="button">Home</a>
+  <input type="submit" class="button">
+  <a href="/" class="button">Home</a>
+</form>
+  <!-- <p>
+
+
+    {% if buggy %}
+
+    <form action="/edit" method="POST">
+      <input type="hidden" name="id" size="5" class="wheels" value="{{ buggy['id'] }}" />
+      <input type="submit" class="button" name="delete" value=Delete></a>
+    </form>
+    
+    {% else %}
+
     <a href="#" type="button" class="button" onclick="auto_fill()">Fill Form</a>
+    {% endif %} -->
   </p>
 
   <div class="message">
@@ -83,7 +95,6 @@
     </p>
   </div>
 </div>
-
 <script>
   function auto_fill()
   {
