@@ -3,7 +3,11 @@
 {% block content %}
 <div class="form">
   <div class="header">
+  {% if buggy ['id'] %}
+    <h1>Editing Buggy #{{ buggy['id'] }}</h1>
+  {% else %}
     <h1>Buggy Creation</h1>
+  {% endif %}
   </div>
   
   <form action="/new" method="post">
