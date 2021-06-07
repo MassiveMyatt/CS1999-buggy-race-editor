@@ -35,6 +35,7 @@ def create_buggy():
         return render_template("buggy-form.html", buggy=record,)
     elif request.method == 'POST':
         msg=""
+        buggy_id = request.form['id']
         qty_wheels = request.form['qty_wheels']
         flag_color = request.form['flag_color']
         flag_color_secondary = request.form['flag_color_secondary']
@@ -102,10 +103,16 @@ def create_buggy():
         try:
             with sql.connect(DATABASE_FILE) as con:
                 cur = con.cursor()
-                cur.execute(
-                    "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=?, tyres=?, TOTAL_COST=? WHERE id=?",
-                    (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST, DEFAULT_BUGGY_ID)
-                )
+                if buggy_id:
+                    cur.execute(
+                        "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=?, tyres=?, TOTAL_COST=? WHERE id=?",
+                        (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST, buggy_id)
+                    )
+                else:
+                    cur.execute(
+                        "INSERT INTO buggies (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST)
+                    )
                 con.commit()
                 msg = f"Total Cost of the Buggy is {TOTAL_COST}"
         except:
@@ -124,16 +131,22 @@ def show_buggies():
     con.row_factory = sql.Row
     cur = con.cursor()
     cur.execute("SELECT * FROM buggies")
-    record = cur.fetchone();
-    return render_template("buggy.html", buggy = record)
+    records = cur.fetchall();
+    return render_template("buggy.html", buggies = records)
 
 #------------------------------------------------------------
 # a placeholder page for editing the buggy: you'll need
 # to change this when you tackle task 2-EDIT
 #------------------------------------------------------------
-@app.route('/edit')
-def edit_buggy():
-    return render_template("buggy-form.html")
+@app.route('/edit/<buggy_id>')
+def edit_buggy(buggy_id):
+    con = sql.connect(DATABASE_FILE)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM buggies WHERE id=?", (buggy_id,))
+    record = cur.fetchone();
+    print (f"FixME Edit #{buggy_id}")
+    return render_template("buggy-form.html", buggy=record)
 
 #------------------------------------------------------------
 # You probably don't need to edit this... unless you want to ;)
