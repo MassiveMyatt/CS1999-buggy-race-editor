@@ -9,7 +9,7 @@
     <h1>Buggy Creation</h1>
   {% endif %}
   </div>
-  
+
   <form action="/new" method="post">
     <input type="hidden" name="id" size="5" class="wheels" value="{{ buggy['id'] }}" />
   <form>
@@ -70,24 +70,15 @@
         <option value="maglev">Maglev</option>
       </select>
     <form><br>
-  <input type="submit" class="button">
+      <br>
+  <input type="submit" name="Sumbit" class="button" value="Submit">
   <a href="/" class="button">Home</a>
+  {% if buggy %}
+  <input type="submit" name="Delete" class="buttonDel" value="Delete"></a>
+  {% else %}
+  <a href="#" type="button" class="button" onclick="auto_fill()">Fill Form</a>
+  {% endif %}
 </form>
-  <!-- <p>
-
-
-    {% if buggy %}
-
-    <form action="/edit" method="POST">
-      <input type="hidden" name="id" size="5" class="wheels" value="{{ buggy['id'] }}" />
-      <input type="submit" class="button" name="delete" value=Delete></a>
-    </form>
-    
-    {% else %}
-
-    <a href="#" type="button" class="button" onclick="auto_fill()">Fill Form</a>
-    {% endif %} -->
-  </p>
 
   <div class="message">
     <p>

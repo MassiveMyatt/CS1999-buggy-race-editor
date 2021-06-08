@@ -53,6 +53,19 @@ a.button:hover {
 input.button {
   background-color: #99ff99;
 }
+
+input.buttonDel {
+  border: 1px solid #000000;
+  padding: 0.5em;
+  margin: 0.5em;
+  border-radius: 0.25em;
+  text-decoration: none;
+  background-color: red;
+  color: #000000;
+  box-shadow: 5px 5px 5px #999999;
+  font-size: 100%;
+}
+
 table {
   border: 1px solid #000000;
   border-collapse: collapse;

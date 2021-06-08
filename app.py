@@ -34,94 +34,111 @@ def create_buggy():
         record = cur.fetchone();
         return render_template("buggy-form.html", buggy=None,)
     elif request.method == 'POST':
-        msg=""
-        buggy_id = request.form['id']
-        qty_wheels = request.form['qty_wheels']
-        flag_color = request.form['flag_color']
-        flag_color_secondary = request.form['flag_color_secondary']
-        flag_pattern = request.form['flag_pattern']
-        power_type= request.form['power_type']
-        tyres = request.form['tyres']
-        if not qty_wheels.isdigit():
-            con = sql.connect(DATABASE_FILE)
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM buggies")
-            record = cur.fetchone();
-            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
-        if not (int(qty_wheels) % 2) == 0:
-            con = sql.connect(DATABASE_FILE)
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM buggies")
-            record = cur.fetchone();
-            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the number of wheels are even.")
-        if (int(qty_wheels)) < 4:
-            con = sql.connect(DATABASE_FILE)
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM buggies")
-            record = cur.fetchone();
-            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure you have more than 4 wheels.")
-        if flag_color == flag_color_secondary:
-            con = sql.connect(DATABASE_FILE)
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM buggies")
-            record = cur.fetchone();
-            return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the Primary and Secondary flag colours are not the same.")        
-        if power_type == "petrol":
-            TOTAL_COST = TOTAL_COST + 4
-        if power_type == "fusion":
-            TOTAL_COST = TOTAL_COST + 400
-        if power_type == "steam":
-            TOTAL_COST = TOTAL_COST + 3
-        if power_type == "bio":
-            TOTAL_COST = TOTAL_COST + 5
-        if power_type == "electric":
-            TOTAL_COST = TOTAL_COST + 20
-        if power_type == "rocket":
-            TOTAL_COST = TOTAL_COST + 16
-        if power_type == "hamster":
-            TOTAL_COST = TOTAL_COST + 3
-        if power_type == "thermo":
-            TOTAL_COST = TOTAL_COST + 300
-        if power_type == "solar": 
-            TOTAL_COST = TOTAL_COST + 40
-        if power_type == "wind":
-            TOTAL_COST = TOTAL_COST + 20
-        if tyres == "knobbly":
-            TOTAL_COST = TOTAL_COST + 15 * int((qty_wheels))
-        if tyres == "slick":
-            TOTAL_COST = TOTAL_COST + 10 * int((qty_wheels))
-        if tyres == "steelband":
-            TOTAL_COST = TOTAL_COST + 20 * int((qty_wheels))
-        if tyres == "reactive":
-            TOTAL_COST = TOTAL_COST + 40 * int((qty_wheels))
-        if tyres == "maglev":
-            TOTAL_COST = TOTAL_COST + 50 * int((qty_wheels))
-        try:
-            with sql.connect(DATABASE_FILE) as con:
+        if request.form.get("Sumbit"):
+            msg=""
+            buggy_id = request.form['id']
+            qty_wheels = request.form['qty_wheels']
+            flag_color = request.form['flag_color']
+            flag_color_secondary = request.form['flag_color_secondary']
+            flag_pattern = request.form['flag_pattern']
+            power_type= request.form['power_type']
+            tyres = request.form['tyres']
+            if not qty_wheels.isdigit():
+                con = sql.connect(DATABASE_FILE)
+                con.row_factory = sql.Row
                 cur = con.cursor()
-                if buggy_id:
-                    cur.execute(
-                        "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=?, tyres=?, TOTAL_COST=? WHERE id=?",
-                        (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST, buggy_id)
-                    )
-                else:
-                    cur.execute(
-                        "INSERT INTO buggies (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                        (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST)
-                    )
-                con.commit()
-                msg = f"Total Cost of the Buggy is {TOTAL_COST}"
-        except:
-            con = sql.connect(DATABASE_FILE)
-            con.rollback()
-            msg = "error in update operation"
-        finally:
-            con.close()
-        return render_template("updated.html", msg = msg,)
+                cur.execute("SELECT * FROM buggies")
+                record = cur.fetchone();
+                return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure it is an integer.")
+            if not (int(qty_wheels) % 2) == 0:
+                con = sql.connect(DATABASE_FILE)
+                con.row_factory = sql.Row
+                cur = con.cursor()
+                cur.execute("SELECT * FROM buggies")
+                record = cur.fetchone();
+                return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the number of wheels are even.")
+            if (int(qty_wheels)) < 4:
+                con = sql.connect(DATABASE_FILE)
+                con.row_factory = sql.Row
+                cur = con.cursor()
+                cur.execute("SELECT * FROM buggies")
+                record = cur.fetchone();
+                return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure you have more than 4 wheels.")
+            if flag_color == flag_color_secondary:
+                con = sql.connect(DATABASE_FILE)
+                con.row_factory = sql.Row
+                cur = con.cursor()
+                cur.execute("SELECT * FROM buggies")
+                record = cur.fetchone();
+                return render_template("buggy-form.html", buggy=record, msg = "The data you entered is incorrect, please ensure the Primary and Secondary flag colours are not the same.")        
+            if power_type == "petrol":
+                TOTAL_COST = TOTAL_COST + 4
+            if power_type == "fusion":
+                TOTAL_COST = TOTAL_COST + 400
+            if power_type == "steam":
+                TOTAL_COST = TOTAL_COST + 3
+            if power_type == "bio":
+                TOTAL_COST = TOTAL_COST + 5
+            if power_type == "electric":
+                TOTAL_COST = TOTAL_COST + 20
+            if power_type == "rocket":
+                TOTAL_COST = TOTAL_COST + 16
+            if power_type == "hamster":
+                TOTAL_COST = TOTAL_COST + 3
+            if power_type == "thermo":
+                TOTAL_COST = TOTAL_COST + 300
+            if power_type == "solar": 
+                TOTAL_COST = TOTAL_COST + 40
+            if power_type == "wind":
+                TOTAL_COST = TOTAL_COST + 20
+            if tyres == "knobbly":
+                TOTAL_COST = TOTAL_COST + 15 * int((qty_wheels))
+            if tyres == "slick":
+                TOTAL_COST = TOTAL_COST + 10 * int((qty_wheels))
+            if tyres == "steelband":
+                TOTAL_COST = TOTAL_COST + 20 * int((qty_wheels))
+            if tyres == "reactive":
+                TOTAL_COST = TOTAL_COST + 40 * int((qty_wheels))
+            if tyres == "maglev":
+                TOTAL_COST = TOTAL_COST + 50 * int((qty_wheels))
+            try:
+                with sql.connect(DATABASE_FILE) as con:
+                    cur = con.cursor()
+                    if buggy_id:
+                        cur.execute(
+                            "UPDATE buggies set qty_wheels=?, flag_color=?, flag_color_secondary=?, flag_pattern=?, power_type=?, tyres=?, TOTAL_COST=? WHERE id=?",
+                            (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST, buggy_id)
+                        )
+                    else:
+                        cur.execute(
+                            "INSERT INTO buggies (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                            (qty_wheels, flag_color, flag_color_secondary, flag_pattern, power_type, tyres, TOTAL_COST)
+                        )
+                    con.commit()
+                    msg = f"Total Cost of the Buggy is {TOTAL_COST}"
+            except:
+                con = sql.connect(DATABASE_FILE)
+                con.rollback()
+                msg = "error in update operation"
+            finally:
+                con.close()
+            return render_template("updated.html", msg = msg,)
+        else:
+            buggy_id = request.form['id']
+            try:
+                with sql.connect(DATABASE_FILE) as con:
+                    cur = con.cursor()
+                    cur.execute("DELETE FROM buggies WHERE id=?", (buggy_id,))
+                    con.commit()
+                    msg = f"Total Cost of the Buggy is {TOTAL_COST}"
+            except:
+                con = sql.connect(DATABASE_FILE)
+                con.rollback()
+                msg = "error in update operation"
+            finally:
+                con.close()
+            return render_template("updated.html", msg = msg,)
+            
 
 #------------------------------------------------------------
 # a page for displaying the buggy
@@ -147,18 +164,6 @@ def edit_buggy(buggy_id):
     cur.execute("SELECT * FROM buggies WHERE id=?", (buggy_id,))
     record = cur.fetchone();
     return render_template("buggy-form.html", buggy=record)
-
-# @app.route('/delete/<buggy_id>', methods=['POST'])
-# def delete_buggy(buggy_id ):
-#     if request.method == "POST":
-#         con = sql.connect(DATABASE_FILE)
-#         con.row_factory = sql.Row
-#         cur = con.cursor()
-#         cur.execute("DELETE FROM buggies WHERE id=?", (buggy_id,))
-#         records = cur.fetchall();
-#         return render_template("buggy-form.html", buggy=records)
-#     elif request.method == "GET":
-#         return render_template("index.html")
 #------------------------------------------------------------
 # You probably don't need to edit this... unless you want to ;)
 #
