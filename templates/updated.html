@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% if check  %}
+  <h1>Buggy Deletion</h1>
+{% else %}
   <h1>Updated Buggy</h1>
-
+{% endif %}
   <p>
-    {{ msg }}<br>
+    {{ msg2 }}<br>
+    {{ msg }}
   </p>
   <p>
     <a href="/" class="button">Home</a>

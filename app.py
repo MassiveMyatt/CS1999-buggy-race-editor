@@ -116,13 +116,14 @@ def create_buggy():
                         )
                     con.commit()
                     msg = f"Total Cost of the Buggy is {TOTAL_COST}"
+                    msg2 = "Buggy has been created"
             except:
                 con = sql.connect(DATABASE_FILE)
                 con.rollback()
                 msg = "error in update operation"
             finally:
                 con.close()
-            return render_template("updated.html", msg = msg,)
+            return render_template("updated.html", msg = msg, msg2 = msg2,)
         else:
             buggy_id = request.form['id']
             try:
@@ -130,14 +131,15 @@ def create_buggy():
                     cur = con.cursor()
                     cur.execute("DELETE FROM buggies WHERE id=?", (buggy_id,))
                     con.commit()
-                    msg = f"Total Cost of the Buggy is {TOTAL_COST}"
+                    msg2 = "Buggy has been deleted"
+                    check = "2"
             except:
                 con = sql.connect(DATABASE_FILE)
                 con.rollback()
                 msg = "error in update operation"
             finally:
                 con.close()
-            return render_template("updated.html", msg = msg,)
+            return render_template("updated.html", msg2 = msg2, check=check)
             
 
 #------------------------------------------------------------
