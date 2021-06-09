@@ -166,6 +166,14 @@ def edit_buggy(buggy_id):
     cur.execute("SELECT * FROM buggies WHERE id=?", (buggy_id,))
     record = cur.fetchone();
     return render_template("buggy-form.html", buggy=record)
+
+#------------------------------------------------------------
+# Poster page
+#------------------------------------------------------------
+@app.route('/poster')
+def poster():
+   return render_template('poster.html')
+
 #------------------------------------------------------------
 # You probably don't need to edit this... unless you want to ;)
 #

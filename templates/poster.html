@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  .cs1999-tasks {
+    border-top: 1px solid black;
+    margin-top: 4em;
+  }
+  .cs1999-tasks .task {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid black;
+  }
+  .cs1999-tasks .task h2 {
+    border-bottom: 3px solid gray;
+  }
+</style>
+
+<!-- see tech note about the poster:  
+      https://rhul-cs-projects.github.io/CS1999-buggy-race-server/                -->
+<!--                                                                              -->
+<!-- anything you want here: make it beautiful! make it appealing! make it clear! -->
+<!-- you can drop images into static/assets if you want... and access them        -->
+<!-- here with <img src="/static/image-filename.png" alt="diagram" />             -->
+<!--                                                                              -->
+<!-- Of course you can edit static/app.css too if you want. It's your webserver,  -->
+<!--                                                                              -->
+<!-- Maybe... delete all these comments too :-)                                   -->
+
+
+<!-- below this point keep this section tag and paste in a <div> for every        -->
+<!-- task you attempted.                                                          -->
+
+<section class="cs1999-tasks">
+
+  <div class="task">
+    <h2>0-GET</h2>
+    <p>
+      I forked the repo on GitHub and then used <code>git clone</code> to make a local copy.
+    </p>
+    <p>
+      Once the repo was on my own machine I was able to commit changes to version control
+      as I went along, and I pushed back up to my GitHub repo at the end of each day.
+      I followed GitHub's instructions and set up a SSH key so I didn't need to enter
+      username and password every time I pushed.<br>
+    <br>
+    I also decided to use GitHub version control for this project, using commits and pushing.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>0-RUN Get app running and view it in a browser</h2>
+    <p>
+      I used <code>pip install -r requirments.txt</code> to install all the required modules. 
+      Then initialized the database and ran the app.
+    </p>
+    <p>
+      I used the terminal in Visual Studio Code to run all my command line commands. 
+      This is where I used <code>pip install -r requirments.txt</code> 
+      and then <code>python3 init_db.py</code> to start up the database, then to run the webserver
+      <code>python3 app.py</code>
+    </p>
+  </div>
+  
+  <div class="task">
+    <h2>0-CHANGE Make a change to a template and see it appear</h2>
+    <p>
+      Here I changed a few headings and bits of text to ensure change was happening
+    </p>
+    <p>
+      After changing these areas of text 
+      I could see that my changes were being reflected in the editor
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>1-ADD Add more data to the form.</h2>
+    <p>
+      For 1-ADD I added <code>flag_color</code>,<code>flag_color_secondary</code>
+      and <code>flag_pattern</code>.
+    </p>
+    <p>
+      Here I just copied and pasted the intital wheel quantity item and
+      changed the names. I decided on adding <code>flag_color</code>,<code>flag_color_secondary</code>
+      and <code>flag_pattern</code> because they were the columns already set up in the database.
+      Instead of using text inputs however, I changed them all to select ones.
+      At this stage I just gave 3 basic colours and the patterns listed in the specification.
+      Here I struggled on getting the data to be then added to the SQL database, and could still only manage one
+      of the items to be updated. However I realised the issue I was having, it was because each input was in a different form 
+      and I was closing it with <code>/form</code>on each data entry. So I made the whole page into one form, and that fixed
+      my issues.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>1-VALID Add basic data validation</h2>
+    <p>
+      I added data validation using <code>if not qty_wheels.isdigit():</code>
+    </p>
+    <p>
+      At this stage I added one piece of data validation and that was
+      to check if the quantity of wheels was a number or not, and if it 
+      was not. A message was displayed a the bottom of the editor saying that
+      it was an incorrect data type and they should enter a integer. Using the
+      <code>msg=</code> that was being passed into the HTML in the updataded page,
+      I copied this concept and edited the message for this error, and implemented it
+      to the buggy form page.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>1-STYLE Style your editor just how you like it</h2>
+    <p>
+      I used CSS styling to style my editor.
+    </p>
+    <p>
+      I didn't do anything drastic with my buggy editor styling, I kept the background colours the same and
+      changed the header to green. I also made my error message appear in red. However the biggest change I made was
+      ensuring all form entries where within a box on screen, and that box would stay together no matter how
+      zoomed in or out the user was. I added margin and padding to ensure it was a box model as well as making a border for it.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-EDIT Edit the record by loading its current values into the form</h2>
+    <p>
+      To preload values into the form I used a hidden and selected option for the select items, and for the text it
+      was a simple <code>value=</code>
+    </p>
+    <p>
+      So instead of using an if with jinja. I created a hidden option for the select form items.
+      Then I made it selected, so when the user loads up the editor, it is pre loaded.
+      By making the item hidden, the user couldn't use it as another dropdown option.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-FORM Make the form better</h2>
+    <p>
+      I added engine power and tyre options to the form. As well changing the 
+      colours to actual colour pickers. 
+    </p>
+    <p>
+      As my form was pretty complete and user friendly as this stage, I just added
+      a few extra data inputs, tyres and engine power. Then for code>flag_color</code>,<code>flag_color_secondary</code>
+      I changed them from select, to colour inputs. Allowing the user to select any
+      RGB colour for their flags. 
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-COST Calculate and save the game cost of the buggy</h2>
+    <p>
+      Using Python IF statements to add the cost to a total cost variable.
+    </p>
+    <p>
+      In order to calculate the total cost of the buggy. I first created a 
+      <code>TOTAL_COST</code> variable in app.py. Having this, I used a plethora
+      of conditionals that would check what the engine and tyre type the user had submitted
+      and depending on what that was, I added the price to the variable <code>TOTAL_COST</code>.
+      The cost is then displayed on the updated page, passed as <code>msg</code> like the eror message
+      or the confirmation that the buggy has been updated. TOTAL_COST is then also updated in the database,
+      as I created a new column for it
+
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>2-RULES Add validation according to the game rules</h2>
+    <p>
+      I added data validation for all rules that applied to data entries I had in my editor.
+    </p>
+    <p>
+      So, I made sure that the two flag colours could not be the same, that the quanity of wheels must be 
+      even. I did that by <code>if not (int(qty_wheels) % 2) == 0:</code>. And then finally
+      ensure that the quanity of wheels was greater thsan 4.
+    </p>
+  </div>
+<!-- this closes the section: keep it in! -->
+</section>
+
+{% endblock %}
