@@ -14,6 +14,24 @@
   .cs1999-tasks .task h2 {
     border-bottom: 3px solid gray;
   }
+
+  .top {
+    border-top: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    
+  }
+
+  .text{
+    padding: 5px;
+    margin: 5px;
+  }
+
+  ul {
+    list-style-position: inside;
+  }
+
 </style>
 
 <!-- see tech note about the poster:  
@@ -30,6 +48,52 @@
 
 <!-- below this point keep this section tag and paste in a <div> for every        -->
 <!-- task you attempted.                                                          -->
+<div class="top">
+  <div class="text">
+    <h1>
+      What is this Buggy Editor?
+    </h1>
+    <p>
+      This buggy editor is a free website that allows you to edit your custom
+      race buggy.<br>
+      It has options you can edit such as:
+      <ul>
+        <li>
+          Quantity of Wheels.
+        </li>
+        <li>
+          Colours of your Flag.
+        </li>
+        <li>
+          Flag Pattern.
+        </li>
+        <li>
+          Engine Power.
+        </li>
+        <li>
+          Tyre Type.
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      You can view all of your buggies at once and see what features they have.<br>
+      If you don't like what you see? You can edit your buggy once 
+      it has been created or if you want, you
+      can delete it if you don't like what you've made. <br>
+      There's a useful auto fill button if you wanna quickly create a buggy<br>
+      When you submit your buggy, the cost is displayed so you know how much you have spent.<br>
+      After that, you can also get the buggy JSON that could be useful.
+    </p>
+    <img src="/static/vKJVM8VQz9.gif">
+    <p>
+      I hope you find this buggy editor useful and easy to use.
+    </p>
+    <a href="/" class="button">Home</a>
+  </div>
+  
+
+</div>
 
 <section class="cs1999-tasks">
 
@@ -171,9 +235,90 @@
       I added data validation for all rules that applied to data entries I had in my editor.
     </p>
     <p>
-      So, I made sure that the two flag colours could not be the same, that the quanity of wheels must be 
+      So, I made sure that the two flag colours could not be the same, that the quantity of wheels must be 
       even. I did that by <code>if not (int(qty_wheels) % 2) == 0:</code>. And then finally
-      ensure that the quanity of wheels was greater thsan 4.
+      ensure that the quantity of wheels was greater thsan 4.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-ENV Switch between dev and production environments</h2>
+    <p>
+      I created a .flaskenv file to switch between dev enviroments.
+    </p>
+    <p>
+      In order to switch between enviroments, I created a .env file instead
+      of using the terminal as that wasn't working when I tried to do it that way.
+      Within the .flaskenv file there is <code>FLASK_APP=app.py FLASK_ENV=development</code>
+      which tells the flask app that it should be in the development enviroment.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-AUTOFILL Add auto-fill to the edit forms</h2>
+    <p>
+      I used JavaScript to create a autofill button for my form.
+    </p>
+    <p>
+      For this task, I used JavaScript to complete it. I created a new button in the form that
+      would autofill the form when clicked. So I knew to use the <code>onclick</code> attribute
+      with a JS function that filled the form. <code>document.getElementByID</code>
+       was what I used to access the different data entries. I tried to use
+       names instead of IDs as I had already defined those but for whatever reason
+       they did not work, so I went through and gave everyone an ID, which
+       did work. For the quantity of wheels, it was easy to do as
+      all I had to do was use <code>Math.random</code> to give the form a random number, with max
+      value of 20 and using <code>*2</code> to ensure it was a even number. However, it
+      would not work when I tried to set a minimum value, so the autofill can give values below 4.
+      For pattern, power and tyres, I created array's and then use Math.random to select a random entry in
+      the array, setting the max value to the amount of entries in the array.
+      To get a random colour, required some complex <code>Math.random</code> in order to 
+      format it in an RGB colour code, so I did take that calculation from google.
+      Then after creating the JS function, I set onlick to run that function, so when
+      the user clicks the button the function runs and the form is filled.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-MULTI Allow different buggies to be created</h2>
+    <p>
+      I changed app.py from using <code>UPDATE</code> to <code>INSERT</code>.
+    </p>
+    <p>
+      Allowing the database to store multiple buggies was relatively simple.
+      I had to changed the SQL from using <code>UPDATE</code> to <code>INSERT</code>.
+      This meant that it was no longer just updating the buggy with the ID 1, it was 
+      adding multiple with a new ID each time. I also had to change the app to take
+      all records opposed to just one, this meant every buggy could be displayed on the page.
+      A Jinja for loop also had to be added to /buggy so that it would loop through the database, displaying every buggy.
+      In order to be able to edit the buggies, I added a conditional to the app, which meant
+      if there was already a buggy ID, it would update that record, and if there was no ID
+      it would create a new one. I also then had to add a new app route <code>/edit/buggy_id</code>
+      and passed buggy_id into the function. This meant that when the user wanted to edit the buggy
+      it would display the buggy that they clicked edit under. Also, to ensure the user could not
+      edit the ID that they were editing, the buggy ID entry was hidden, this also stopped the user
+      from setting their own IDs.
+    </p>
+  </div>
+
+  <div class="task">
+    <h2>3-DEL Allow buggies to be deleted</h2>
+    <p>
+      I created a conditional within the /new route, in order to have 2 submit buttons.
+      When one was clicked, the record would be added or updated, when the other was clicked it
+      would be deleted.
+    </p>
+    <p>
+      At first I tried to create my own app route <code>/delete</code> but I could not get it to work.
+      So instead, I created 2 submit buttons on the edit form, and gave one the name Submit.
+      Then in the app I created an <code>IF</code> statement underneath the already created <code>IF request.method == "POST"</code>.
+      With this, I then made it so, if the request from the form was "Submit" it would then run the
+      normal <code>POST</code> request with updated and inserting. However, anything else it would run the
+      <code>DELETE</code> SQL code I added, this worked with an <code>ELSE</code>, however if there was more than 2 submit buttons
+      on the form this would not work. Doing this did create one issue that is still unfixed, which is when the 
+      user enters a wrong data entry and it gives the user an error message, 
+      it returns the edit form with the delete button, instead of the normal one. This is an issue with the
+      Jinja <code>IF</code> statements in the HTML, that needs fixing.
     </p>
   </div>
 <!-- this closes the section: keep it in! -->
